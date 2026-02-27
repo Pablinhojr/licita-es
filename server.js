@@ -314,7 +314,8 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
 // Qualquer outra rota não-API é redirecionada para o React
-app.get('*', (req, res) => {
+// O Express 5 requer Regex ao invés de string com asterisco
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
 });
 
